@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.cookpad.android.licensetools'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.sample.aacsample"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation Libs.support_v4
+    implementation Libs.support_appcompat_v7
+    implementation Libs.support_recyclerview_v7
+    implementation Libs.support_design
+    implementation Libs.support_constraint_layout
+    kapt Libs.databinding
+
+    implementation Libs.lifecycle_extensions
+    implementation Libs.lifecycle_runtime
+    implementation Libs.lifecycle_common
+    annotationProcessor Libs.lifecycle_compiler
+    implementation Libs.room_runtime
+    annotationProcessor Libs.room_compiler
+    kapt Libs.room_compiler
+
+    implementation Libs.okhttp3
+    implementation Libs.okhttp3_logging_interceptor
+    implementation Libs.retrofit2
+    implementation Libs.retrofit2_converter_moshi
+    implementation Libs.moshi
+    implementation Libs.moshi_kotlin
+    implementation Libs.picasso
+
+    implementation Libs.kotlin_stdlib
+
+    testImplementation Libs.junit
+    androidTestImplementation Libs.test_runner
+    androidTestImplementation Libs.espresso_core
+}
