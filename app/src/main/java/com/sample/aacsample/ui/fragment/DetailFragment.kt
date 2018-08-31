@@ -102,6 +102,7 @@ class DetailFragment: BaseFragment() {
                 getActivityFragmentManager().popBackStack()
             }
         }
+        binding.toolbar?.menu?.visibility = View.GONE
     }
 
     private fun updateToolbar() {

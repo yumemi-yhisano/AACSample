@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_home"
+            android:title="ホーム"/>
+
+        <item
+            android:id="@+id/drawer_news"
+            android:title="お知らせ"/>
+
+        <item
+            android:id="@+id/drawer_license"
+            android:title="ライセンス"/>
+    </group>
+
+    <item
+        android:title="その他">
+
+        <menu
+            android:checkableBehavior="single">
+
+            <item
+                android:id="@+id/drawer_app_info"
+                android:title="アプリ情報"/>
+        </menu>
+    </item>
+</menu>

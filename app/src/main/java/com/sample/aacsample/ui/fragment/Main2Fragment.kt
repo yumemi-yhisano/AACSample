@@ -1,10 +1,14 @@
 package com.sample.aacsample.ui.fragment
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.view.GravityCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +37,28 @@ class Main2Fragment : BaseFragment() {
         binding.toolbar?.title?.text = ("NEWS")
         binding.toolbar?.leftArrow?.visibility = View.GONE
 
+        binding.toolbar?.menu?.setOnClickListener {
+            if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
+                binding.drawer.closeDrawer(GravityCompat.START)
+            } else{
+                binding.drawer.openDrawer(GravityCompat.START)
+            }
+        }
+        binding.drawerNavigation.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.drawer_home -> {}
+                R.id.drawer_news -> {}
+                R.id.drawer_license -> {}
+                R.id.drawer_app_info -> {
+                    activity?.startActivity(Intent().apply {
+                        action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        data = Uri.parse("package:" + context!!.packageName)
+                    })
+                }
+            }
+            return@setNavigationItemSelectedListener true
+        }
         return binding.root
     }
 
