@@ -7,6 +7,7 @@ object Versions {
     val retrofit = "2.4.0"
     val moshi = "1.6.0"
     val picasso = "2.5.2"
+    val hyperion = "0.9.24"
 }
 
 object Libs {
@@ -33,4 +34,15 @@ object Libs {
     val junit = "junit:junit:4.12"
     val test_runner = "com.android.support.test:runner:1.0.2"
     val espresso_core = "com.android.support.test.espresso:espresso-core:3.0.2"
+    val hyperion_core = "com.willowtreeapps.hyperion:hyperion-core:${Versions.hyperion}"
+    val hyperion_attr = "com.willowtreeapps.hyperion:hyperion-attr:${Versions.hyperion}"
+    val hyperion_measurement = "com.willowtreeapps.hyperion:hyperion-measurement:${Versions.hyperion}"
+    val hyperion_disk = "com.willowtreeapps.hyperion:hyperion-disk:${Versions.hyperion}"
+    val hyperion_recorder = "com.willowtreeapps.hyperion:hyperion-recorder:${Versions.hyperion}"
+    val hyperion_phoenix = "com.willowtreeapps.hyperion:hyperion-phoenix:${Versions.hyperion}"
+    val hyperion_crash = "com.willowtreeapps.hyperion:hyperion-crash:${Versions.hyperion}"
+    val hyperion_shared_preferences = "com.willowtreeapps.hyperion:hyperion-shared-preferences:${Versions.hyperion}"
+    val hyperion_geiger_counter = "com.willowtreeapps.hyperion:hyperion-geiger-counter:${Versions.hyperion}"
+    val hyperion_timber = "com.willowtreeapps.hyperion:hyperion-timber:${Versions.hyperion}"
+    val hyperion_build_config = "com.willowtreeapps.hyperion:hyperion-build-config:${Versions.hyperion}"
 }
