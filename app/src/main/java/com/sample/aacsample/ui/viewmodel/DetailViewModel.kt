@@ -15,7 +15,7 @@ import android.widget.ProgressBar
  */
 class DetailViewModel(application: Application): AndroidViewModel(application) {
 
-    fun configureVebView(view: WebView, progressBar: ProgressBar) {
+    fun configureVebView(view: WebView, progressBar: ProgressBar, noInternet: View) {
         view.settings.javaScriptEnabled = true
         view.webChromeClient = object : WebChromeClient() {
 
@@ -44,6 +44,7 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 view?.visibility = if (mError) View.INVISIBLE else View.VISIBLE
+                noInternet.visibility = if (mError) View.VISIBLE else View.INVISIBLE
                 mError = false
                 super.onPageFinished(view, url)
             }

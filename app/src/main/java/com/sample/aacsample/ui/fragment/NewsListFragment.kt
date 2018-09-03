@@ -54,7 +54,6 @@ class NewsListFragment : BaseFragment() {
         binding.refreshLayout.setOnRefreshListener {
             Log.d(getFragmentTag(), "onRefresh")
             viewModel.update()
-            binding.refreshLayout.isRefreshing = false
         }
 
         return binding.root
@@ -63,6 +62,7 @@ class NewsListFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         viewModel.update()
+        binding.refreshLayout.isRefreshing = true
     }
 
     private fun observableViewModel(viewModel: NewsViewModel) {
@@ -71,6 +71,7 @@ class NewsListFragment : BaseFragment() {
                 Log.d(getFragmentTag(), "onChanged")
                 newsAdapter?.setArticles(it)
             }
+            binding.refreshLayout.isRefreshing = false
         })
     }
 }

@@ -68,7 +68,7 @@ class DetailFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.configureVebView(binding.webview, binding.progress)
+        viewModel.configureVebView(binding.webview, binding.progress, binding.noInternet!!.root)
 
         if (savedInstanceState == null) {
             binding.webview.loadUrl(arguments!!.getString(ARG_URL))

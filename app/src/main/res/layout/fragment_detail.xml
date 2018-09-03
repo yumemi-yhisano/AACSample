@@ -24,6 +24,11 @@
             android:layout_weight="1"
             android:background="#ffffff">
 
+            <include
+                android:id="@+id/no_internet"
+                layout="@layout/view_no_internet"
+                android:visibility="invisible"/>
+
             <WebView
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
