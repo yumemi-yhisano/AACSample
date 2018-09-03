@@ -56,6 +56,7 @@ class DetailFragment: BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate<FragmentDetailBinding>(inflater, R.layout.fragment_detail, container, false)
+        binding.model = viewModel
         initToolbar()
         return binding.root
     }
@@ -68,7 +69,7 @@ class DetailFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.configureVebView(binding.webview, binding.progress, binding.noInternet!!.root)
+        viewModel.configureVebView(binding.webview, binding.noInternet!!.root)
 
         if (savedInstanceState == null) {
             binding.webview.loadUrl(arguments!!.getString(ARG_URL))

@@ -4,26 +4,30 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.databinding.ObservableBoolean
+import android.databinding.ObservableInt
 import android.graphics.Bitmap
 import android.os.Message
 import android.view.View
 import android.webkit.*
-import android.widget.ProgressBar
 
 /**
  * Created by y_hisano on 2018/08/15.
  */
 class DetailViewModel(application: Application): AndroidViewModel(application) {
 
-    fun configureVebView(view: WebView, progressBar: ProgressBar, noInternet: View) {
+    val progress = ObservableInt(100)
+    val progressVisible = ObservableBoolean(false)
+
+    fun configureVebView(view: WebView, noInternet: View) {
         view.settings.javaScriptEnabled = true
         view.webChromeClient = object : WebChromeClient() {
 
             override fun onProgressChanged(view: WebView, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
 
-                progressBar.progress = newProgress
-                progressBar.visibility = if (newProgress < 100) View.VISIBLE else View.INVISIBLE
+                progress.set(newProgress)
+                progressVisible.set(newProgress < 100)
             }
         }
 

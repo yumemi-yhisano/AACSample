@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="model"
+            type="com.sample.aacsample.ui.viewmodel.DetailViewModel"/>
+    </data>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -40,7 +47,9 @@
                 android:layout_height="4dp"
                 android:layout_gravity="top"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:progressDrawable="@drawable/web_progress"/>
+                android:progressDrawable="@drawable/web_progress"
+                android:progress="@{ model.progress }"
+                android:visibility="@{ model.progressVisible ? View.VISIBLE : View.GONE }"/>
         </FrameLayout>
 
     </LinearLayout>
