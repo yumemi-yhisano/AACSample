@@ -1,10 +1,7 @@
 package com.sample.aacsample.ui.fragment
 
-import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -15,6 +12,8 @@ import android.view.ViewGroup
 import com.sample.aacsample.R
 import com.sample.aacsample.data.api.repository.Category
 import com.sample.aacsample.databinding.FragmentMain2Binding
+import com.sample.aacsample.ui.activity.DetailActivity
+import com.sample.aacsample.util.ActivityUtil
 
 /**
  * Created by y_hisano on 2018/07/24.
@@ -48,15 +47,17 @@ class Main2Fragment : BaseFragment() {
             when(it.itemId) {
                 R.id.drawer_home -> {}
                 R.id.drawer_news -> {}
-                R.id.drawer_license -> {}
+                R.id.drawer_license -> {
+                    getTransitionManager().modal(
+                            DetailFragment.createModal(
+                                    "file:///android_asset/licenses.html", "ライセンス"),
+                            DetailActivity::class.java)
+                }
                 R.id.drawer_app_info -> {
-                    activity?.startActivity(Intent().apply {
-                        action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        data = Uri.parse("package:" + context!!.packageName)
-                    })
+                    ActivityUtil.openAppInfo(activity)
                 }
             }
+            binding.drawer.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
         }
         return binding.root
