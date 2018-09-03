@@ -58,7 +58,7 @@ class Main2Fragment : BaseFragment() {
                 }
             }
             binding.drawer.closeDrawer(GravityCompat.START)
-            return@setNavigationItemSelectedListener true
+            return@setNavigationItemSelectedListener false
         }
         return binding.root
     }
