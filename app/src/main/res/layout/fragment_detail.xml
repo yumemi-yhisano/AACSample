@@ -10,10 +10,11 @@
             type="com.sample.aacsample.ui.viewmodel.DetailViewModel"/>
     </data>
 
-    <LinearLayout
+    <com.sample.aacsample.ui.view.StatusBarOverlayLinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="@bool/fitsSystemWindow">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -52,5 +53,5 @@
                 android:visibility="@{ model.progressVisible ? View.VISIBLE : View.GONE }"/>
         </FrameLayout>
 
-    </LinearLayout>
+    </com.sample.aacsample.ui.view.StatusBarOverlayLinearLayout>
 </layout>
