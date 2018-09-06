@@ -56,17 +56,17 @@ dependencies {
 
     implementation Libs.kotlin_stdlib
 
-    debugImplementation Libs.hyperion_core
-    debugImplementation Libs.hyperion_attr
-    debugImplementation Libs.hyperion_measurement
-    debugImplementation Libs.hyperion_disk
-    debugImplementation Libs.hyperion_recorder
-    debugImplementation Libs.hyperion_phoenix
-    debugImplementation Libs.hyperion_crash
-    debugImplementation Libs.hyperion_shared_preferences
-    debugImplementation Libs.hyperion_geiger_counter
-    debugImplementation Libs.hyperion_timber
-    debugImplementation Libs.hyperion_build_config
+//    debugImplementation Libs.hyperion_core
+//    debugImplementation Libs.hyperion_attr
+//    debugImplementation Libs.hyperion_measurement
+//    debugImplementation Libs.hyperion_disk
+//    debugImplementation Libs.hyperion_recorder
+//    debugImplementation Libs.hyperion_phoenix
+//    debugImplementation Libs.hyperion_crash
+//    debugImplementation Libs.hyperion_shared_preferences
+//    debugImplementation Libs.hyperion_geiger_counter
+//    debugImplementation Libs.hyperion_timber
+//    debugImplementation Libs.hyperion_build_config
 
     testImplementation Libs.junit
     androidTestImplementation Libs.test_runner
