@@ -11,7 +11,6 @@ object Versions {
 }
 
 object Libs {
-    val support_v4 = "com.android.support:support-v4:${Versions.support_lib}"
     val support_appcompat_v7 = "com.android.support:appcompat-v7:${Versions.support_lib}"
     val support_recyclerview_v7 = "com.android.support:recyclerview-v7:${Versions.support_lib}"
     val support_design = "com.android.support:design:${Versions.support_lib}"
@@ -30,7 +29,7 @@ object Libs {
     val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
     val moshi_kotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
-    val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     val junit = "junit:junit:4.12"
     val test_runner = "com.android.support.test:runner:1.0.2"
     val espresso_core = "com.android.support.test.espresso:espresso-core:3.0.2"
