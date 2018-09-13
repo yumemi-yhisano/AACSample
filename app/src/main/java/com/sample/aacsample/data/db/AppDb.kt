@@ -13,7 +13,7 @@ abstract class AppDb: RoomDatabase() {
     abstract fun clippedArticleDao(): ClippedArticleDao
 
     companion object {
-        var instance: AppDb? = null
+        private var instance: AppDb? = null
 
         @Synchronized
         fun get(context: Context) =

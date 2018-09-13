@@ -54,6 +54,7 @@ dependencies {
     implementation Libs.moshi_kotlin
     implementation Libs.picasso
 
+    implementation Libs.kotlinx_coroutines
     implementation Libs.kotlin_stdlib
 
 //    debugImplementation Libs.hyperion_core

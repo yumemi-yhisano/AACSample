@@ -29,6 +29,7 @@ object Libs {
     val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
     val moshi_kotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+    val kotlinx_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.21"
     val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     val junit = "junit:junit:4.12"
     val test_runner = "com.android.support.test:runner:1.0.2"
