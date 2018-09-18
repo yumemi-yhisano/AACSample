@@ -8,8 +8,8 @@
             android:title="ホーム"/>
 
         <item
-            android:id="@+id/drawer_news"
-            android:title="お知らせ"/>
+            android:id="@+id/drawer_clipped"
+            android:title="クリップ"/>
 
         <item
             android:id="@+id/drawer_license"

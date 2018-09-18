@@ -9,8 +9,10 @@ import android.support.v4.view.GravityCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.sample.aacsample.MainApplication
 import com.sample.aacsample.R
-import com.sample.aacsample.data.api.repository.Category
+import com.sample.aacsample.core.CategorizedTab
+import com.sample.aacsample.core.TabManager
 import com.sample.aacsample.databinding.FragmentMain2Binding
 import com.sample.aacsample.ui.activity.DetailActivity
 import com.sample.aacsample.util.ActivityUtil
@@ -21,15 +23,17 @@ import com.sample.aacsample.util.ActivityUtil
 class Main2Fragment : BaseFragment() {
 
     private lateinit var binding: FragmentMain2Binding
+    private val tabManager = MainApplication.getInstance().appEnv.tabManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        tabManager.loadTabs()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate<FragmentMain2Binding>(inflater, R.layout.fragment_main2, container, false)
 
-        binding.viewpager.adapter = MainPagerAdapter(childFragmentManager)
+        binding.viewpager.adapter = MainPagerAdapter(childFragmentManager, tabManager)
         binding.tablayout.setupWithViewPager(binding.viewpager)
         binding.tablayout.tabMode = TabLayout.MODE_SCROLLABLE
 
@@ -46,7 +50,7 @@ class Main2Fragment : BaseFragment() {
         binding.drawerNavigation.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.drawer_home -> {}
-                R.id.drawer_news -> {}
+                R.id.drawer_clipped -> {}
                 R.id.drawer_license -> {
                     getTransitionManager().modal(
                             DetailFragment.createModal(
@@ -68,25 +72,17 @@ class Main2Fragment : BaseFragment() {
     }
 }
 
-class MainPagerAdapter(private val fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
-
-    private val tabs = Tabs()
+class MainPagerAdapter(private val fragmentManager: FragmentManager, private val tabManager: TabManager) : FragmentStatePagerAdapter(fragmentManager) {
 
     override fun getItem(position: Int) =
-            if (tabs.isCategory(position)) NewsListFragment.newInstance(Category.values()[position])
-            else ClippedNewsListFragment.newInstance()
+            tabManager.tabs[position].let {
+                when (it) {
+                    is CategorizedTab -> NewsListFragment.newInstance(it.getCategory())
+                    else -> ClippedNewsListFragment.newInstance()
+                }
+            }
 
-    override fun getCount() = tabs.size()
+    override fun getCount() = tabManager.tabs.size
 
-    override fun getPageTitle(position: Int) = tabs.pageTitle(position)
-}
-
-class Tabs {
-    fun size() = Category.values().size + 1
-
-    fun pageTitle(position: Int) =
-            if (isCategory(position)) Category.values()[position].name
-            else "clipped"
-
-    fun isCategory(position: Int) = Category.values().size > position
+    override fun getPageTitle(position: Int) = tabManager.tabs[position].tag
 }

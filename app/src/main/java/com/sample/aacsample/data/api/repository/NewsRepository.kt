@@ -62,9 +62,9 @@ enum class Country {
 }
 
 enum class Category {
+    general,
     business,
     entertainment,
-    general,
     health,
     science,
     sports,

@@ -38,5 +38,6 @@ class Preferences {
 
 enum class PrefKey {
     INITIALIZED,
-    LOADED
+    LOADED,
+    TABS
 }
