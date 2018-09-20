@@ -1,38 +1,33 @@
 package com.sample.aacsample.core
 
+import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import com.sample.aacsample.data.PrefKey
 import com.sample.aacsample.data.Preferences
 import com.sample.aacsample.data.api.repository.Category
 
 class TabManager(private val context: Context) {
-    val tabs = arrayListOf<TabModel>()
+    val tabs = MutableLiveData<List<TabModel<*>>>()
 
     private val defaultTabsStr = Category.values().joinToString(separator = "|").plus("|clipped")
 
+    init {
+        loadTabs()
+    }
+
     fun loadTabs() {
-        tabs.clear()
-        Preferences.getVal(context, PrefKey.TABS, String::class.java).let { tabStr ->
-            when {
-                tabStr.isEmpty() -> defaultTabsStr
-                else -> tabStr
-            }.split("|").mapTo(tabs){ tag -> createTab(tag) }
+        mutableListOf<TabModel<*>>().let {tmpTabs ->
+            Preferences.getVal(context, PrefKey.TABS, String::class.java).let { tabStr ->
+                when {
+                    tabStr.isEmpty() -> defaultTabsStr
+                    else -> tabStr
+                }.split("|").mapTo(tmpTabs){ tag -> createTab(tag) }
+            }
+            tabs.postValue(tmpTabs)
         }
     }
 
-    private fun validateTabsOrder() : Boolean {
-        tabs.forEachIndexed { index, tabModel ->
-            if (index > 0 && tabModel.tabMode == TabMode.FIX_START) {
-                return false
-            }
-            if (index < tabs.size - 1 && tabModel.tabMode == TabMode.FIX_LAST) {
-                return false
-            }
-        }
-        return true
-    }
-
-    private fun createTab(tag: String) =
+    fun createTab(tag: String) =
             when(tag) {
                 "clipped" -> TabModelImpl(tag, TabMode.FIX_LAST)
                 else -> CategorizedTabModelImpl(
@@ -43,11 +38,31 @@ class TabManager(private val context: Context) {
                         }
                 )
             }
+
+    fun indexOf(tag: String) = tabs.value?.indexOfFirst { it.tag == tag } ?: 0
+
+    fun saveTabs(tmpTabs: List<TabModel<*>>) {
+        tmpTabs.mapTo(mutableListOf()) {it.tag }.joinToString(separator = "|").let {
+            Preferences.putVal(context, PrefKey.TABS, it)
+        }
+    }
+
+    fun defaultTabTags() = defaultTabsStr.split("|")
+
+    fun isEditable(tag: String) =
+            when(tag) {
+                "clipped", "general" -> false
+                else -> true
+            }
 }
 
-data class TabModelImpl(override val tag: String, override val tabMode: TabMode) : TabModel
+data class TabModelImpl(override val tag: String, override val tabMode: TabMode) : TabModel<TabModelImpl> {
+    override fun deepCopy() = copy()
+}
 
-data class CategorizedTabModelImpl(override val tag: String, override val tabMode: TabMode) : TabModel, CategorizedTab {
+data class CategorizedTabModelImpl(override val tag: String, override val tabMode: TabMode) : TabModel<CategorizedTabModelImpl>, CategorizedTab {
+    override fun deepCopy() = copy()
+
     override fun getCategory() = Category.valueOf(tag)
 }
 
@@ -55,10 +70,12 @@ interface CategorizedTab {
     fun getCategory(): Category
 }
 
-interface TabModel {
+interface TabModel<T> {
     val tag: String
     val tabMode: TabMode
+    fun deepCopy() :T
 }
+
 enum class TabMode {
     FIX_START,
     FIX_LAST,

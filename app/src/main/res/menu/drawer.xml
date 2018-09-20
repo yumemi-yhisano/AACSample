@@ -12,6 +12,10 @@
             android:title="クリップ"/>
 
         <item
+            android:id="@+id/drawer_tab_edit"
+            android:title="タブ編集"/>
+
+        <item
             android:id="@+id/drawer_license"
             android:title="ライセンス"/>
     </group>

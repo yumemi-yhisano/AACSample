@@ -6,6 +6,7 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.util.Log
 import com.sample.aacsample.R
 import com.sample.aacsample.ui.activity.BaseActivity
+import com.sample.aacsample.ui.activity.MainActivity
 import com.sample.aacsample.ui.fragment.BaseFragment
 
 /**
@@ -32,14 +33,28 @@ class TransitionManager(private val activity: BaseActivity) {
                 .commit()
     }
 
-    fun <T: BaseActivity> push(bundle: Bundle, clazz: Class<T>) {
+    fun <T: BaseActivity> push(bundle: Bundle = Bundle(), clazz: Class<T>) {
         Log.d(TAG, "push: " + bundle.toString())
         transit(bundle, clazz, TransitionType.PUSH)
     }
 
-    fun <T: BaseActivity> modal(bundle: Bundle, clazz: Class<T>) {
+    fun <T: BaseActivity> modal(bundle: Bundle = Bundle(), clazz: Class<T>) {
         Log.d(TAG, "modal: " + bundle.toString())
         transit(bundle, clazz, TransitionType.MODAL)
+    }
+
+    fun selectTab(tag: String) {
+        when (activity) {
+            is MainActivity -> activity.selectTab(tag)
+            else -> {
+                activity.startActivity(
+                        Intent(activity, MainActivity::class.java).apply {
+                            putExtra(MainActivity.BUNDLE_TAB_TAG, tag)
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                )
+            }
+        }
     }
 
     private fun <T: BaseActivity> transit(bundle: Bundle, clazz: Class<T>, anim: TransitionType) {

@@ -14,7 +14,7 @@ class Preferences {
                     Long::class.java -> it.getLong(key.name.toLowerCase(), default as? Long? ?:0L) as T
                     Boolean::class.java -> it.getBoolean(key.name.toLowerCase(), default as? Boolean? ?:false) as T
                     Float::class.java -> it.getFloat(key.name.toLowerCase(), default as? Float? ?:0F) as T
-                    else -> throw IllegalArgumentException("not support class[${T::class.java}]")
+                    else -> throw IllegalStateException("not support class[${T::class.java}]")
                 }
             }
         }
@@ -22,12 +22,12 @@ class Preferences {
         fun putVal(context: Context, key: PrefKey, value: Any) {
             getPref(context).edit().also {
                 when(value) {
-                    value is String -> it.putString(key.name.toLowerCase(), value as String)
-                    value is Int -> it.putInt(key.name.toLowerCase(), value as Int)
-                    value is Long -> it.putLong(key.name.toLowerCase(), value as Long)
-                    value is Boolean -> it.putBoolean(key.name.toLowerCase(), value as Boolean)
-                    value is Float -> it.putFloat(key.name.toLowerCase(), value as Float)
-                    else -> throw IllegalArgumentException("not support value class[${value::class.java}]")
+                    is String -> it.putString(key.name.toLowerCase(), value)
+                    is Int -> it.putInt(key.name.toLowerCase(), value)
+                    is Long -> it.putLong(key.name.toLowerCase(), value)
+                    is Boolean -> it.putBoolean(key.name.toLowerCase(), value)
+                    is Float -> it.putFloat(key.name.toLowerCase(), value)
+                    else -> throw IllegalStateException("not support value class[${value::class.java}]")
                 }
             }.apply()
         }
