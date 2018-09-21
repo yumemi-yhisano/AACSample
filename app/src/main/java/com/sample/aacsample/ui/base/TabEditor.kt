@@ -1,12 +1,11 @@
 package com.sample.aacsample.ui.base
 
-import com.sample.aacsample.MainApplication
+import com.sample.aacsample.core.TabManager
 import com.sample.aacsample.core.TabMode
 import com.sample.aacsample.core.TabModel
 import java.lang.ref.WeakReference
 
-class TabEditor {
-    private val tabManager = MainApplication.getInstance().appEnv.tabManager
+class TabEditor(private val tabManager: TabManager) {
     val tmpTabs = mutableListOf<TabModel<*>>()
     private val tabChangeObservers = mutableListOf<WeakReference<TmpTabChangeObserver>>()
 

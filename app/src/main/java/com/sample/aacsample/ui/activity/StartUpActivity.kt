@@ -11,6 +11,7 @@ import com.sample.aacsample.data.PrefKey
 import com.sample.aacsample.data.Preferences
 import com.sample.aacsample.databinding.ActivityStartupBinding
 import com.sample.aacsample.ui.base.PausableDispatcher
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
 import kotlin.coroutines.experimental.CoroutineContext
@@ -25,7 +26,7 @@ class StartUpActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_startup)
 
-        launch(dispatcher) {
+        GlobalScope.launch(dispatcher) {
             Log.d("StartUpActivity", "launch START")
             delay(1000)
             val initialized = Preferences.getVal(this@StartUpActivity.applicationContext, PrefKey.INITIALIZED, Boolean::class.java)
@@ -62,17 +63,17 @@ class StartUpActivity : BaseActivity() {
     }
 
     private suspend fun load(parentContext: CoroutineContext) =
-//        launch(CommonPool + parentContext) { // pausable を有効にしたい場合親の CoroutineContext を渡す
-        launch {
-            runOnUiThread { binding.message.text = "Downloading..." }
-            Log.d("StartUpActivity", "Downloading...")
-            delay(2000)
-            runOnUiThread { binding.message.text = "Loading..." }
-            Log.d("StartUpActivity", "Loading...")
-            delay(2000)
-            Preferences.putVal(this@StartUpActivity.applicationContext, PrefKey.LOADED, true)
-            Log.d("StartUpActivity", "Loaded!")
-        }
+//            GlobalScope.launch(Dispatchers.Default + parentContext) { // pausable を有効にしたい場合親の CoroutineContext を渡す
+            GlobalScope.launch {
+                runOnUiThread { binding.message.text = "Downloading..." }
+                Log.d("StartUpActivity", "Downloading...")
+                delay(2000)
+                runOnUiThread { binding.message.text = "Loading..." }
+                Log.d("StartUpActivity", "Loading...")
+                delay(2000)
+                Preferences.putVal(this@StartUpActivity.applicationContext, PrefKey.LOADED, true)
+                Log.d("StartUpActivity", "Loaded!")
+            }
 
     private fun transitMain() {
         startActivity(Intent(this@StartUpActivity, MainActivity::class.java))

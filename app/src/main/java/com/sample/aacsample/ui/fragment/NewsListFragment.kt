@@ -1,7 +1,6 @@
 package com.sample.aacsample.ui.fragment
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -15,6 +14,8 @@ import com.sample.aacsample.data.api.repository.Category
 import com.sample.aacsample.databinding.FragmentNewsListBinding
 import com.sample.aacsample.ui.adapter.NewsAdapter
 import com.sample.aacsample.ui.viewmodel.NewsViewModel
+import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.core.parameter.parametersOf
 
 /**
  * Created by y_hisano on 2018/07/24.
@@ -39,8 +40,7 @@ class NewsListFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val factory = NewsViewModel.Factory(activity!!.application, arguments!!.getSerializable(ARG_CATEGORY) as Category)
-        viewModel = ViewModelProviders.of(this, factory).get(NewsViewModel::class.java)
+        viewModel = getViewModel{ parametersOf(arguments!!.getSerializable(ARG_CATEGORY) as Category) }
         observableViewModel(viewModel)
     }
 

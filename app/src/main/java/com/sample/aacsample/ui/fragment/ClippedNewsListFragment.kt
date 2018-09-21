@@ -1,7 +1,6 @@
 package com.sample.aacsample.ui.fragment
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -14,6 +13,7 @@ import com.sample.aacsample.data.db.ClippedArticle
 import com.sample.aacsample.databinding.FragmentNewsListBinding
 import com.sample.aacsample.ui.adapter.ClippedNewsAdapter
 import com.sample.aacsample.ui.viewmodel.ClippedNewsViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by y_hisano on 2018/07/24.
@@ -21,7 +21,7 @@ import com.sample.aacsample.ui.viewmodel.ClippedNewsViewModel
 class ClippedNewsListFragment : BaseFragment() {
 
     private var newsAdapter: ClippedNewsAdapter? = null
-    private lateinit var viewModel: ClippedNewsViewModel
+    private val viewModel: ClippedNewsViewModel by viewModel()
     private lateinit var binding: FragmentNewsListBinding
 
     companion object {
@@ -31,8 +31,6 @@ class ClippedNewsListFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val factory = ClippedNewsViewModel.Factory(activity!!.application)
-        viewModel = ViewModelProviders.of(this, factory).get(ClippedNewsViewModel::class.java)
         observableViewModel(viewModel)
     }
 
@@ -42,11 +40,6 @@ class ClippedNewsListFragment : BaseFragment() {
         binding.recyclerView.adapter = ClippedNewsAdapter(this, viewModel).also { newsAdapter = it }
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
-//        binding.refreshLayout.setColorSchemeColors(0xFF800000.toInt(), 0xFF008000.toInt(), 0xFF000080.toInt(), 0xFF808000.toInt())
-//        binding.refreshLayout.setOnRefreshListener {
-//            Log.d(getFragmentTag(), "onRefresh")
-//            binding.refreshLayout.isRefreshing = false
-//        }
         binding.refreshLayout.isEnabled = false
 
         return binding.root

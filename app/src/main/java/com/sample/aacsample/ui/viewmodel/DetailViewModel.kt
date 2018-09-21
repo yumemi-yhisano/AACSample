@@ -1,9 +1,6 @@
 package com.sample.aacsample.ui.viewmodel
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
 import android.graphics.Bitmap
@@ -14,7 +11,7 @@ import android.webkit.*
 /**
  * Created by y_hisano on 2018/08/15.
  */
-class DetailViewModel(application: Application): AndroidViewModel(application) {
+class DetailViewModel: ViewModel() {
 
     val progress = ObservableInt(100)
     val progressVisible = ObservableBoolean(false)
@@ -57,12 +54,6 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
                 mError = true
                 super.onReceivedError(view, request, error)
             }
-        }
-    }
-
-    class Factory(private val application: Application): ViewModelProvider.NewInstanceFactory() {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return DetailViewModel(application) as T
         }
     }
 }

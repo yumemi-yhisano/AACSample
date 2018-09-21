@@ -1,6 +1,5 @@
 package com.sample.aacsample.ui.fragment
 
-import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +8,14 @@ import android.view.ViewGroup
 import com.sample.aacsample.R
 import com.sample.aacsample.databinding.FragmentDetailBinding
 import com.sample.aacsample.ui.viewmodel.DetailViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by y_hisano on 2018/08/15.
  */
 class DetailFragment: BaseFragment() {
     private lateinit var binding: FragmentDetailBinding
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModel()
 
     companion object {
         private const val ARG_URL = "ARG_URL"
@@ -39,13 +39,6 @@ class DetailFragment: BaseFragment() {
                     putString(ARG_URL, url)
                     putString(ARG_TITLE, title)
                 }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val factory = DetailViewModel.Factory(activity!!.application)
-        viewModel = ViewModelProviders.of(this, factory).get(DetailViewModel::class.java)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

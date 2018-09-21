@@ -54,8 +54,15 @@ dependencies {
     implementation Libs.moshi_kotlin
     implementation Libs.picasso
 
-    implementation Libs.kotlinx_coroutines
+    implementation Libs.coroutines_core
+    implementation Libs.coroutines_android
     implementation Libs.kotlin_stdlib
+
+    implementation Libs.koin_android
+    implementation Libs.koin_scope
+    implementation Libs.koin_viewmodel
+    testImplementation Libs.koin_test
+    androidTestImplementation Libs.koin_test
 
 //    debugImplementation Libs.hyperion_core
 //    debugImplementation Libs.hyperion_attr

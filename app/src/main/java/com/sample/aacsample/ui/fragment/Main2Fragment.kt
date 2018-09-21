@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sample.aacsample.MainApplication
 import com.sample.aacsample.R
 import com.sample.aacsample.core.CategorizedTab
 import com.sample.aacsample.core.TabManager
@@ -20,6 +19,7 @@ import com.sample.aacsample.databinding.FragmentMain2Binding
 import com.sample.aacsample.ui.activity.DetailActivity
 import com.sample.aacsample.ui.activity.TabEditActivity
 import com.sample.aacsample.util.ActivityUtil
+import org.koin.android.ext.android.inject
 
 /**
  * Created by y_hisano on 2018/07/24.
@@ -27,7 +27,7 @@ import com.sample.aacsample.util.ActivityUtil
 class Main2Fragment : BaseFragment() {
 
     private lateinit var binding: FragmentMain2Binding
-    private val tabManager = MainApplication.getInstance().appEnv.tabManager
+    private val tabManager: TabManager by inject()
 
     companion object {
         private const val ARG_TAG = "ARG_TAG"

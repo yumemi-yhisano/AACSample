@@ -1,15 +1,13 @@
 package com.sample.aacsample
 
 import android.app.Application
-import com.sample.aacsample.core.AppEnv
-import com.sample.aacsample.core.InitializerImpl
+import com.sample.aacsample.di.mainApp
+import org.koin.android.ext.android.startKoin
 
 /**
  * Created by y_hisano on 2018/08/16.
  */
 class MainApplication : Application() {
-
-    lateinit var appEnv: AppEnv
 
     companion object {
         private lateinit var instance :MainApplication
@@ -21,6 +19,6 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        appEnv = AppEnv(this, InitializerImpl(this))
+        startKoin(this, mainApp)
     }
 }

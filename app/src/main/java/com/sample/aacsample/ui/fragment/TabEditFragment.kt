@@ -10,13 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.sample.aacsample.R
+import com.sample.aacsample.core.TabManager
 import com.sample.aacsample.databinding.FragmentTabEditBinding
 import com.sample.aacsample.ui.base.TabEditor
+import org.koin.android.ext.android.inject
 
 class TabEditFragment: BaseFragment() {
 
+    private val tabManager: TabManager by inject()
     private lateinit var binding: FragmentTabEditBinding
-    val tabEditor = TabEditor()
+    val tabEditor = TabEditor(tabManager)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_edit, container, false)
