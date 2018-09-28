@@ -27,5 +27,5 @@ data class ClippedSource (
 
 fun from (article: Article) = ClippedArticle(
         ClippedSource(article.source.id ?: "", article.source.name ?: ""),
-        article.author, article.title, article.description, article.url,
-        article.urlToImage, article.publishedAt)
+        article.author ?: "", article.title ?: "", article.description, article.url ?: "",
+        article.urlToImage ?: "", article.publishedAt ?: "")
