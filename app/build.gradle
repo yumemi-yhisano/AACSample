@@ -30,6 +30,10 @@ android {
     }
 }
 
+configurations {
+    ktlint
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation Libs.support_appcompat_v7
@@ -79,8 +83,29 @@ dependencies {
     testImplementation Libs.junit
     androidTestImplementation Libs.test_runner
     androidTestImplementation Libs.espresso_core
+
+    ktlint Libs.ktlint
 }
 
 kapt {
     generateStubs = true
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "--android", "--color", "src/**/*.kt"
+    ignoreExitValue true
+    // to generate report in checkstyle format prepend following args:
+    // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    // see https://github.com/shyiko/ktlint#usage for more
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
 }

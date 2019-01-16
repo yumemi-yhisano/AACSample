@@ -1,5 +1,6 @@
 object Versions {
     val kotlin = "1.3.10"
+    val ktlint = "0.29.0"
     val support_lib = "27.1.1"
     val lifecycle = "1.1.1"
     val room = "1.1.1"
@@ -34,6 +35,7 @@ object Libs {
     val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    val ktlint = "com.github.shyiko:ktlint:${Versions.ktlint}"
     val koin_android = "org.koin:koin-android:${Versions.koin}"
     val koin_scope = "org.koin:koin-android-scope:${Versions.koin}"
     val koin_viewmodel = "org.koin:koin-android-viewmodel:${Versions.koin}"
