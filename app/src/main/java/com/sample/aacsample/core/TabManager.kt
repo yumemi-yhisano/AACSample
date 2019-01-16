@@ -3,8 +3,9 @@ package com.sample.aacsample.core
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import com.sample.aacsample.data.PrefKey
-import com.sample.aacsample.data.Preferences
 import com.sample.aacsample.data.api.repository.Category
+import com.sample.aacsample.ext.getPrefVal
+import com.sample.aacsample.ext.putPrefVal
 
 class TabManager(private val context: Context) {
     val tabs = MutableLiveData<List<TabModel<*>>>()
@@ -17,7 +18,7 @@ class TabManager(private val context: Context) {
 
     fun loadTabs() {
         mutableListOf<TabModel<*>>().let {tmpTabs ->
-            Preferences.getVal(context, PrefKey.TABS, String::class.java).let { tabStr ->
+            context.getPrefVal<String>(PrefKey.TABS).let { tabStr ->
                 when {
                     tabStr.isEmpty() -> defaultTabsStr
                     else -> tabStr
@@ -43,7 +44,7 @@ class TabManager(private val context: Context) {
 
     fun saveTabs(tmpTabs: List<TabModel<*>>) {
         tmpTabs.mapTo(mutableListOf()) {it.tag }.joinToString(separator = "|").let {
-            Preferences.putVal(context, PrefKey.TABS, it)
+            context.putPrefVal(PrefKey.TABS, it)
         }
     }
 

@@ -9,8 +9,9 @@ import android.support.v4.app.FragmentActivity
 import android.util.Log
 import com.sample.aacsample.R
 import com.sample.aacsample.data.PrefKey
-import com.sample.aacsample.data.Preferences
 import com.sample.aacsample.databinding.ActivityStartupBinding
+import com.sample.aacsample.ext.getPrefVal
+import com.sample.aacsample.ext.putPrefVal
 import com.sample.aacsample.ui.base.PausableDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -30,8 +31,8 @@ class StartUpActivity : FragmentActivity() {
         GlobalScope.launch(dispatcher) {
             Log.d("StartUpActivity", "launch START")
             delay(1000)
-            val initialized = Preferences.getVal(this@StartUpActivity.applicationContext, PrefKey.INITIALIZED, Boolean::class.java)
-            val loaded = Preferences.getVal(this@StartUpActivity.applicationContext, PrefKey.LOADED, Boolean::class.java)
+            val initialized = applicationContext.getPrefVal<Boolean>(PrefKey.INITIALIZED)
+            val loaded = applicationContext.getPrefVal<Boolean>(PrefKey.LOADED)
             if (! initialized) {
                 initialize()
             }
@@ -59,7 +60,7 @@ class StartUpActivity : FragmentActivity() {
         runOnUiThread{ binding.message.text = "Initializing..." }
         Log.d("StartUpActivity", "Initializing...")
         delay(2000)
-        Preferences.putVal(this@StartUpActivity.applicationContext, PrefKey.INITIALIZED, true)
+        applicationContext.putPrefVal(PrefKey.INITIALIZED, true)
         Log.d("StartUpActivity", "Initialized!")
     }
 
@@ -72,7 +73,7 @@ class StartUpActivity : FragmentActivity() {
                 runOnUiThread { binding.message.text = "Loading..." }
                 Log.d("StartUpActivity", "Loading...")
                 delay(2000)
-                Preferences.putVal(this@StartUpActivity.applicationContext, PrefKey.LOADED, true)
+                applicationContext.putPrefVal(PrefKey.LOADED, true)
                 Log.d("StartUpActivity", "Loaded!")
             }
 
