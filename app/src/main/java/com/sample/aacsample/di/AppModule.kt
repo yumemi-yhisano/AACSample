@@ -7,8 +7,6 @@ import com.sample.aacsample.data.api.repository.Category
 import com.sample.aacsample.data.api.repository.NewsRepository
 import com.sample.aacsample.data.api.service.NewsService
 import com.sample.aacsample.data.db.AppDb
-import com.sample.aacsample.ui.TransitionManager
-import com.sample.aacsample.ui.activity.BaseActivity
 import com.sample.aacsample.ui.viewmodel.ClippedNewsViewModel
 import com.sample.aacsample.ui.viewmodel.DetailViewModel
 import com.sample.aacsample.ui.viewmodel.NewsViewModel
@@ -28,8 +26,6 @@ val uiModule = module {
     viewModel { DetailViewModel() }
 
     viewModel { (category: Category) -> NewsViewModel(get(), get(), category) }
-
-    factory { (activity: BaseActivity) -> TransitionManager(activity) }
 }
 
 val dataModule = module {

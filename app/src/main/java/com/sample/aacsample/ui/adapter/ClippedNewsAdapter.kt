@@ -1,6 +1,7 @@
 package com.sample.aacsample.ui.adapter
 
 import android.databinding.DataBindingUtil
+import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -10,8 +11,8 @@ import android.widget.Toast
 import com.sample.aacsample.R
 import com.sample.aacsample.data.db.ClippedArticle
 import com.sample.aacsample.databinding.ViewNewsItemBinding
+import com.sample.aacsample.ext.modalFragment
 import com.sample.aacsample.ui.activity.DetailActivity
-import com.sample.aacsample.ui.fragment.BaseFragment
 import com.sample.aacsample.ui.fragment.DetailFragment
 import com.sample.aacsample.ui.viewmodel.ClippedNewsViewModel
 import com.squareup.picasso.Picasso
@@ -19,7 +20,7 @@ import com.squareup.picasso.Picasso
 /**
  * Created by y_hisano on 2018/08/10.
  */
-class ClippedNewsAdapter(private val fragment: BaseFragment, val viewModel: ClippedNewsViewModel) : RecyclerView.Adapter<ClippedNewsViewHolder>() {
+class ClippedNewsAdapter(private val fragment: Fragment, val viewModel: ClippedNewsViewModel) : RecyclerView.Adapter<ClippedNewsViewHolder>() {
 
     private val articles = mutableListOf<ClippedArticle>()
 
@@ -43,10 +44,8 @@ class ClippedNewsAdapter(private val fragment: BaseFragment, val viewModel: Clip
         }
         holder.binding.root.setOnClickListener {
             if (!TextUtils.isEmpty(article.url)) {
-//                fragment.getTransitionManager().push(DetailFragment.newInstance(article.url, article.title))
-                fragment.getTransitionManager().modal(
-                        DetailFragment.createModal(article.url, article.title),
-                        DetailActivity::class.java)
+//                fragment.activity?.pushFragment(DetailFragment.newInstance(article.url, article.title))
+                fragment.activity?.modalFragment<DetailActivity>(DetailFragment.createModal(article.url, article.title))
             }
         }
         holder.binding.root.setOnLongClickListener {

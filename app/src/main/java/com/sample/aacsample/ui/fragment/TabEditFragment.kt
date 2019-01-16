@@ -15,7 +15,7 @@ import com.sample.aacsample.databinding.FragmentTabEditBinding
 import com.sample.aacsample.ui.base.TabEditor
 import org.koin.android.ext.android.inject
 
-class TabEditFragment: BaseFragment() {
+class TabEditFragment : Fragment() {
 
     private val tabManager: TabManager by inject()
     private lateinit var binding: FragmentTabEditBinding

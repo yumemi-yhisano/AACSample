@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.support.v4.app.FragmentActivity
 import android.util.Log
 import com.sample.aacsample.R
 import com.sample.aacsample.data.PrefKey
@@ -16,7 +17,7 @@ import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
 import kotlin.coroutines.experimental.CoroutineContext
 
-class StartUpActivity : BaseActivity() {
+class StartUpActivity : FragmentActivity() {
 
     private lateinit var binding: ActivityStartupBinding
     private val dispatcher = PausableDispatcher(Handler(Looper.getMainLooper()))

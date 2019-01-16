@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.GravityCompat
@@ -16,15 +17,17 @@ import com.sample.aacsample.core.CategorizedTab
 import com.sample.aacsample.core.TabManager
 import com.sample.aacsample.data.api.repository.Category
 import com.sample.aacsample.databinding.FragmentMain2Binding
+import com.sample.aacsample.ext.modalFragment
+import com.sample.aacsample.ext.openAppInfo
+import com.sample.aacsample.ext.selectTab
 import com.sample.aacsample.ui.activity.DetailActivity
 import com.sample.aacsample.ui.activity.TabEditActivity
-import com.sample.aacsample.util.ActivityUtil
 import org.koin.android.ext.android.inject
 
 /**
  * Created by y_hisano on 2018/07/24.
  */
-class Main2Fragment : BaseFragment() {
+class Main2Fragment : Fragment() {
 
     private lateinit var binding: FragmentMain2Binding
     private val tabManager: TabManager by inject()
@@ -71,22 +74,20 @@ class Main2Fragment : BaseFragment() {
         binding.drawerNavigation.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.drawer_home -> {
-                    getTransitionManager().selectTab(Category.general.name)
+                    activity?.selectTab(Category.general.name)
                 }
                 R.id.drawer_clipped -> {
-                    getTransitionManager().selectTab("clipped")
+                    activity?.selectTab("clipped")
                 }
                 R.id.drawer_tab_edit -> {
-                    getTransitionManager().modal(clazz = TabEditActivity::class.java)
+                    activity?.modalFragment<TabEditActivity>()
                 }
                 R.id.drawer_license -> {
-                    getTransitionManager().modal(
-                            DetailFragment.createModal(
-                                    "file:///android_asset/licenses.html", "ライセンス"),
-                            DetailActivity::class.java)
+                    activity?.modalFragment<DetailActivity>(
+                        DetailFragment.createModal("file:///android_asset/licenses.html", "ライセンス"))
                 }
                 R.id.drawer_app_info -> {
-                    ActivityUtil.openAppInfo(activity)
+                    activity?.openAppInfo()
                 }
             }
             binding.drawer.closeDrawer(GravityCompat.START)

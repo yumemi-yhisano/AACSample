@@ -2,14 +2,17 @@ package com.sample.aacsample.ui.activity
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 import com.sample.aacsample.R
 import com.sample.aacsample.databinding.ActivityMainBinding
+import com.sample.aacsample.ext.addFragment
+import com.sample.aacsample.ext.findFragmentBy
 import com.sample.aacsample.ui.fragment.Main2Fragment
 
 /**
  * Created by y_hisano on 2018/07/24.
  */
-class MainActivity : BaseActivity() {
+class MainActivity : FragmentActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -30,16 +33,11 @@ class MainActivity : BaseActivity() {
                 }
                 return@let Main2Fragment()
             }
-
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.container, fragment, fragment.getFragmentTag())
-                    .commit()
+            addFragment(fragment)
         }
     }
 
     fun selectTab(tag: String) {
-        getMainFragment()?.selectTab(tag)
+        findFragmentBy<Main2Fragment>()?.selectTab(tag)
     }
-
-    private fun getMainFragment() = supportFragmentManager.findFragmentByTag(Main2Fragment::class.java.simpleName) as? Main2Fragment?
 }

@@ -3,6 +3,7 @@ package com.sample.aacsample.ui.fragment
 import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -17,7 +18,7 @@ import com.sample.aacsample.databinding.ViewTabEditItemBinding
 import com.sample.aacsample.ui.base.TabEditor
 import com.sample.aacsample.ui.base.TmpTabChangeObserver
 
-class TabReplaceFragment : BaseFragment() {
+class TabReplaceFragment : Fragment() {
 
     private lateinit var binding: FragmentTabReplaceBinding
 

@@ -2,6 +2,7 @@ package com.sample.aacsample.ui.fragment
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,7 +14,7 @@ import com.sample.aacsample.databinding.FragmentTabReplaceBinding
 import com.sample.aacsample.databinding.ViewTabEditItemBinding
 import com.sample.aacsample.ui.base.TabEditor
 
-class TabAddDeleteFragment :BaseFragment() {
+class TabAddDeleteFragment : Fragment() {
 
     private lateinit var binding: FragmentTabReplaceBinding
 

@@ -2,6 +2,7 @@ package com.sample.aacsample.ui.fragment
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 /**
  * Created by y_hisano on 2018/08/15.
  */
-class DetailFragment: BaseFragment() {
+class DetailFragment: Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private val viewModel: DetailViewModel by viewModel()
 

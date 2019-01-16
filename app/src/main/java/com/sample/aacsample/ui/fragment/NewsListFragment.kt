@@ -3,6 +3,7 @@ package com.sample.aacsample.ui.fragment
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.sample.aacsample.R
 import com.sample.aacsample.data.api.model.Article
 import com.sample.aacsample.data.api.repository.Category
 import com.sample.aacsample.databinding.FragmentNewsListBinding
+import com.sample.aacsample.ext.TAG
 import com.sample.aacsample.ui.adapter.NewsAdapter
 import com.sample.aacsample.ui.viewmodel.NewsViewModel
 import org.koin.android.viewmodel.ext.android.getViewModel
@@ -20,7 +22,7 @@ import org.koin.core.parameter.parametersOf
 /**
  * Created by y_hisano on 2018/07/24.
  */
-class NewsListFragment : BaseFragment() {
+class NewsListFragment : Fragment() {
 
     private var newsAdapter: NewsAdapter? = null
     private lateinit var viewModel: NewsViewModel
@@ -52,7 +54,7 @@ class NewsListFragment : BaseFragment() {
 
         binding.refreshLayout.setColorSchemeColors(0xFF800000.toInt(), 0xFF008000.toInt(), 0xFF000080.toInt(), 0xFF808000.toInt())
         binding.refreshLayout.setOnRefreshListener {
-            Log.d(getFragmentTag(), "onRefresh")
+            Log.d(TAG, "onRefresh")
             viewModel.update()
         }
 
@@ -68,7 +70,7 @@ class NewsListFragment : BaseFragment() {
     private fun observableViewModel(viewModel: NewsViewModel) {
         viewModel.getObservableObject().observe(this, Observer<List<Article>> {
             if (it != null) {
-                Log.d(getFragmentTag(), "onChanged")
+                Log.d(TAG, "onChanged")
                 newsAdapter?.setArticles(it)
             }
             binding.refreshLayout.isRefreshing = false
