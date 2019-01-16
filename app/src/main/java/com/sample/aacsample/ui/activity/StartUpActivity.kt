@@ -12,10 +12,10 @@ import com.sample.aacsample.data.PrefKey
 import com.sample.aacsample.data.Preferences
 import com.sample.aacsample.databinding.ActivityStartupBinding
 import com.sample.aacsample.ui.base.PausableDispatcher
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class StartUpActivity : FragmentActivity() {
 

@@ -1,11 +1,11 @@
 object Versions {
-    val kotlin = "1.2.51"
+    val kotlin = "1.3.10"
     val support_lib = "27.1.1"
     val lifecycle = "1.1.1"
     val room = "1.1.1"
     val okhttp = "3.11.0"
     val retrofit = "2.4.0"
-    val coroutines = "0.26.1"
+    val coroutines = "1.1.0"
     val moshi = "1.6.0"
     val picasso = "2.5.2"
     val koin = "1.0.0"

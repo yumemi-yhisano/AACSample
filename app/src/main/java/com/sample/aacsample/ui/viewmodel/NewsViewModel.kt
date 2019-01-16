@@ -7,8 +7,8 @@ import com.sample.aacsample.data.api.repository.Country
 import com.sample.aacsample.data.api.repository.NewsRepository
 import com.sample.aacsample.data.db.AppDb
 import com.sample.aacsample.data.db.from
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * Created by y_hisano on 2018/08/10.

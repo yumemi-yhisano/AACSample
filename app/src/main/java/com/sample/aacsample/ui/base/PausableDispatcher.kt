@@ -2,10 +2,10 @@ package com.sample.aacsample.ui.base
 
 import android.os.Handler
 import android.util.Log
-import kotlinx.coroutines.experimental.CoroutineDispatcher
-import kotlinx.coroutines.experimental.Runnable
-import java.util.*
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.CoroutineDispatcher
+import java.util.LinkedList
+import java.util.Queue
+import kotlin.coroutines.CoroutineContext
 
 class PausableDispatcher(private val handler: Handler): CoroutineDispatcher() {
     private val queue: Queue<Runnable> = LinkedList()
