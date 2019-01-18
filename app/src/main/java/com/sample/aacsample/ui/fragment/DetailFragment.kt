@@ -14,7 +14,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 /**
  * Created by y_hisano on 2018/08/15.
  */
-class DetailFragment: Fragment() {
+class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private val viewModel: DetailViewModel by viewModel()
 

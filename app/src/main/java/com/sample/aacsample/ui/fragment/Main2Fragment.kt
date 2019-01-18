@@ -67,12 +67,12 @@ class Main2Fragment : Fragment() {
         binding.toolbar?.menu?.setOnClickListener {
             if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
                 binding.drawer.closeDrawer(GravityCompat.START)
-            } else{
+            } else {
                 binding.drawer.openDrawer(GravityCompat.START)
             }
         }
         binding.drawerNavigation.setNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.drawer_home -> {
                     activity?.selectTab(Category.general.name)
                 }

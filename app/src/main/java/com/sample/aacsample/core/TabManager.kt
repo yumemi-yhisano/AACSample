@@ -17,19 +17,19 @@ class TabManager(private val context: Context) {
     }
 
     fun loadTabs() {
-        mutableListOf<TabModel<*>>().let {tmpTabs ->
+        mutableListOf<TabModel<*>>().let { tmpTabs ->
             context.getPrefVal<String>(PrefKey.TABS).let { tabStr ->
                 when {
                     tabStr.isEmpty() -> defaultTabsStr
                     else -> tabStr
-                }.split("|").mapTo(tmpTabs){ tag -> createTab(tag) }
+                }.split("|").mapTo(tmpTabs) { tag -> createTab(tag) }
             }
             tabs.postValue(tmpTabs)
         }
     }
 
     fun createTab(tag: String) =
-            when(tag) {
+            when (tag) {
                 "clipped" -> TabModelImpl(tag, TabMode.FIX_LAST)
                 else -> CategorizedTabModelImpl(
                         tag,
@@ -43,7 +43,7 @@ class TabManager(private val context: Context) {
     fun indexOf(tag: String) = tabs.value?.indexOfFirst { it.tag == tag } ?: 0
 
     fun saveTabs(tmpTabs: List<TabModel<*>>) {
-        tmpTabs.mapTo(mutableListOf()) {it.tag }.joinToString(separator = "|").let {
+        tmpTabs.mapTo(mutableListOf()) { it.tag }.joinToString(separator = "|").let {
             context.putPrefVal(PrefKey.TABS, it)
         }
     }
@@ -51,17 +51,19 @@ class TabManager(private val context: Context) {
     fun defaultTabTags() = defaultTabsStr.split("|")
 
     fun isEditable(tag: String) =
-            when(tag) {
+            when (tag) {
                 "clipped", "general" -> false
                 else -> true
             }
 }
 
-data class TabModelImpl(override val tag: String, override val tabMode: TabMode) : TabModel<TabModelImpl> {
+data class TabModelImpl(override val tag: String, override val tabMode: TabMode)
+    : TabModel<TabModelImpl> {
     override fun deepCopy() = copy()
 }
 
-data class CategorizedTabModelImpl(override val tag: String, override val tabMode: TabMode) : TabModel<CategorizedTabModelImpl>, CategorizedTab {
+data class CategorizedTabModelImpl(override val tag: String, override val tabMode: TabMode)
+    : TabModel<CategorizedTabModelImpl>, CategorizedTab {
     override fun deepCopy() = copy()
 
     override fun getCategory() = Category.valueOf(tag)
@@ -74,7 +76,7 @@ interface CategorizedTab {
 interface TabModel<T> {
     val tag: String
     val tabMode: TabMode
-    fun deepCopy() :T
+    fun deepCopy(): T
 }
 
 enum class TabMode {

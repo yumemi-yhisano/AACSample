@@ -65,7 +65,7 @@ class TabReplaceFragment : Fragment() {
             }
 
             override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-                val state = when(actionState) {
+                val state = when (actionState) {
                     0 -> "IDLE"
                     1 -> "SWIPE"
                     2 -> "DRAG"
@@ -86,7 +86,7 @@ class TabReplaceFragment : Fragment() {
             }
 
             override fun getMovementFlags(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int {
-                viewHolder?.adapterPosition?.let{ pos ->
+                viewHolder?.adapterPosition?.let { pos ->
                     getTabEditFragment().tabEditor.tmpTabs.let {
                         if (it[pos].tabMode == TabMode.FIX_LAST || it[pos].tabMode == TabMode.FIX_START) {
                             return ItemTouchHelper.Callback.makeFlag(ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.UP or ItemTouchHelper.DOWN)

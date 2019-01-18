@@ -14,11 +14,12 @@ import retrofit2.Response
  */
 class NewsRepository(val service: NewsService) {
     private val apiKey = "f10141ddd2f842bebece5fabb72c4d7c"
-    private val articleData = Category.values().map { it to MutableLiveData<List<Article>>() } .toMap()
+    private val articleData =
+            Category.values().map { it to MutableLiveData<List<Article>>() }.toMap()
 
     fun requestHeadline(country: Country, category: Category): LiveData<List<Article>> {
         val data = articleData[category]!!
-        service.headline(apiKey, country.name, category.name).enqueue(object: Callback<Headlines> {
+        service.headline(apiKey, country.name, category.name).enqueue(object : Callback<Headlines> {
             override fun onFailure(call: Call<Headlines>?, t: Throwable?) {
                 data.postValue(null)
             }

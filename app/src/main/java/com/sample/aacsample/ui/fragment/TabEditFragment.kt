@@ -62,9 +62,9 @@ class TabEditFragment : Fragment() {
     private fun getActivityFragmentManager() = activity!!.supportFragmentManager!!
 }
 
-class TabEditViewPager(private val fragmentManager: FragmentManager): FragmentStatePagerAdapter(fragmentManager) {
+class TabEditViewPager(private val fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
     override fun getItem(position: Int): Fragment =
-            when(position) {
+            when (position) {
                 0 -> TabReplaceFragment()
                 1 -> TabAddDeleteFragment()
                 else -> throw IllegalStateException("position[$position] isn't available.")
@@ -73,7 +73,7 @@ class TabEditViewPager(private val fragmentManager: FragmentManager): FragmentSt
     override fun getCount() = 2
 
     override fun getPageTitle(position: Int): CharSequence? =
-            when(position) {
+            when (position) {
                 0 -> "並び替え"
                 1 -> "追加・削除"
                 else -> throw IllegalStateException("position[$position] isn't available.")

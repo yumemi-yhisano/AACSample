@@ -40,17 +40,22 @@ fun FragmentActivity.pushFragment(fragment: Fragment) {
             .commit()
 }
 
-inline fun <reified T : FragmentActivity> FragmentActivity.pushFragment(bundle: Bundle = Bundle()) {
+inline fun <reified T : FragmentActivity>
+        FragmentActivity.pushFragment(bundle: Bundle = Bundle()) {
     Log.d(TAG, "pushFragment: " + bundle.toString())
     transit<T>(bundle, TransitionType.PUSH)
 }
 
-inline fun <reified T : FragmentActivity> FragmentActivity.modalFragment(bundle: Bundle = Bundle()) {
+inline fun <reified T : FragmentActivity>
+        FragmentActivity.modalFragment(bundle: Bundle = Bundle()) {
     Log.d(TAG, "modalFragment: " + bundle.toString())
     transit<T>(bundle, TransitionType.MODAL)
 }
 
-inline fun <reified T : FragmentActivity> FragmentActivity.transit(bundle: Bundle, anim: TransitionType) {
+inline fun <reified T : FragmentActivity> FragmentActivity.transit(
+    bundle: Bundle,
+    anim: TransitionType
+) {
     startActivity(
         Intent(this, T::class.java).apply {
             putExtra(MODAL_BUNDLE, bundle)
@@ -74,7 +79,8 @@ fun FragmentActivity.selectTab(tag: String) {
     }
 }
 
-inline fun <reified T : Fragment> FragmentActivity.findFragmentBy() = supportFragmentManager.findFragmentByTag(T::class.java.simpleName) as? T
+inline fun <reified T : Fragment> FragmentActivity.findFragmentBy() =
+        supportFragmentManager.findFragmentByTag(T::class.java.simpleName) as? T
 
 enum class TransitionType(val enter: Int, val exit: Int, val popEnter: Int, val popExit: Int) {
     NONE(0, 0, 0, 0),

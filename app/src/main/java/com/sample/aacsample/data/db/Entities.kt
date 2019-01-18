@@ -10,22 +10,22 @@ import com.sample.aacsample.data.api.model.Article
  */
 @Entity
 data class ClippedArticle(
-        @Embedded
-        val source: ClippedSource,
-        val author: String = "",
-        val title: String = "",
-        val description: String = "",
-        @PrimaryKey val url: String = "",
-        val urlToImage: String = "",
-        val publishedAt: String = ""
+    @Embedded
+    val source: ClippedSource,
+    val author: String = "",
+    val title: String = "",
+    val description: String = "",
+    @PrimaryKey val url: String = "",
+    val urlToImage: String = "",
+    val publishedAt: String = ""
 )
 
-data class ClippedSource (
-        val id: String,
-        val name: String
+data class ClippedSource(
+    val id: String,
+    val name: String
 )
 
-fun from (article: Article) = ClippedArticle(
+fun from(article: Article) = ClippedArticle(
         ClippedSource(article.source.id ?: "", article.source.name ?: ""),
         article.author ?: "", article.title ?: "", article.description, article.url ?: "",
         article.urlToImage ?: "", article.publishedAt ?: "")

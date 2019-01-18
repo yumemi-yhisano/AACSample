@@ -42,7 +42,7 @@ class NewsListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = getViewModel{ parametersOf(arguments!!.getSerializable(ARG_CATEGORY) as Category) }
+        viewModel = getViewModel { parametersOf(arguments!!.getSerializable(ARG_CATEGORY) as Category) }
         observableViewModel(viewModel)
     }
 

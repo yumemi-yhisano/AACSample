@@ -11,7 +11,7 @@ import android.webkit.*
 /**
  * Created by y_hisano on 2018/08/15.
  */
-class DetailViewModel: ViewModel() {
+class DetailViewModel : ViewModel() {
 
     val progress = ObservableInt(100)
     val progressVisible = ObservableBoolean(false)

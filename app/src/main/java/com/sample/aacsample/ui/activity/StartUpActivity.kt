@@ -57,7 +57,7 @@ class StartUpActivity : FragmentActivity() {
     }
 
     private suspend fun initialize() {
-        runOnUiThread{ binding.message.text = "Initializing..." }
+        runOnUiThread { binding.message.text = "Initializing..." }
         Log.d("StartUpActivity", "Initializing...")
         delay(2000)
         applicationContext.putPrefVal(PrefKey.INITIALIZED, true)

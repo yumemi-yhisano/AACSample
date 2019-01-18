@@ -68,5 +68,4 @@ class TabAddDeleteViewAdaptor(private val tabEditor: TabEditor) : RecyclerView.A
     }
 }
 
-
 class TabAddDeleteItemViewHolder(val binding: ViewTabEditItemBinding) : RecyclerView.ViewHolder(binding.root)
