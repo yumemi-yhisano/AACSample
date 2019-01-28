@@ -65,7 +65,7 @@ class ChatFragment : Fragment() {
     }
 
     private fun observableViewModel(viewModel: ChatViewModel) {
-        viewModel.chatList.observe(this, Observer<List<ChatItem>> { list ->
+        viewModel.chatItems.observe(this, Observer<List<ChatItem>> { list ->
             if (list != null) {
                 Log.d(TAG, "onChanged $list")
                 (binding.recyclerView.adapter as? ChatRecyclerAdapter)?.let {

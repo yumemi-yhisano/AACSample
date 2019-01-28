@@ -30,7 +30,7 @@ val uiModule = module {
 
     viewModel { (category: Category) -> NewsViewModel(get(), get(), category) }
 
-    viewModel { ChatViewModel(get()) }
+    viewModel { ChatViewModel(get(), get()) }
 }
 
 val dataModule = module {
