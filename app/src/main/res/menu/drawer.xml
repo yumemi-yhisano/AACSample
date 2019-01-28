@@ -16,6 +16,9 @@
             android:title="タブ編集"/>
 
         <item
+            android:id="@+id/drawer_chat"
+            android:title="チャット"/>
+        <item
             android:id="@+id/drawer_license"
             android:title="ライセンス"/>
     </group>

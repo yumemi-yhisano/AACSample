@@ -17,9 +17,10 @@ import com.sample.aacsample.core.CategorizedTab
 import com.sample.aacsample.core.TabManager
 import com.sample.aacsample.data.api.repository.Category
 import com.sample.aacsample.databinding.FragmentMain2Binding
-import com.sample.aacsample.ext.modalFragment
 import com.sample.aacsample.ext.openAppInfo
 import com.sample.aacsample.ext.selectTab
+import com.sample.aacsample.ext.transitModal
+import com.sample.aacsample.ui.activity.ChatActivity
 import com.sample.aacsample.ui.activity.DetailActivity
 import com.sample.aacsample.ui.activity.TabEditActivity
 import org.koin.android.ext.android.inject
@@ -80,10 +81,13 @@ class Main2Fragment : Fragment() {
                     activity?.selectTab("clipped")
                 }
                 R.id.drawer_tab_edit -> {
-                    activity?.modalFragment<TabEditActivity>()
+                    activity?.transitModal<TabEditActivity>()
+                }
+                R.id.drawer_chat -> {
+                    activity?.transitModal<ChatActivity>()
                 }
                 R.id.drawer_license -> {
-                    activity?.modalFragment<DetailActivity>(
+                    activity?.transitModal<DetailActivity>(
                         DetailFragment.createModal("file:///android_asset/licenses.html", "ライセンス"))
                 }
                 R.id.drawer_app_info -> {

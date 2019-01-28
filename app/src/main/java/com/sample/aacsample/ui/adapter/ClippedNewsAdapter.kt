@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.sample.aacsample.R
 import com.sample.aacsample.data.db.ClippedArticle
 import com.sample.aacsample.databinding.ViewNewsItemBinding
-import com.sample.aacsample.ext.modalFragment
+import com.sample.aacsample.ext.transitModal
 import com.sample.aacsample.ui.activity.DetailActivity
 import com.sample.aacsample.ui.fragment.DetailFragment
 import com.sample.aacsample.ui.viewmodel.ClippedNewsViewModel
@@ -44,8 +44,8 @@ class ClippedNewsAdapter(private val fragment: Fragment, val viewModel: ClippedN
         }
         holder.binding.root.setOnClickListener {
             if (!TextUtils.isEmpty(article.url)) {
-//                fragment.activity?.pushFragment(DetailFragment.newInstance(article.url, article.title))
-                fragment.activity?.modalFragment<DetailActivity>(DetailFragment.createModal(article.url, article.title))
+//                fragment.activity?.transitPush(DetailFragment.newInstance(article.url, article.title))
+                fragment.activity?.transitModal<DetailActivity>(DetailFragment.createModal(article.url, article.title))
             }
         }
         holder.binding.root.setOnLongClickListener {
