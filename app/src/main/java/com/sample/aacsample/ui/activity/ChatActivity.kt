@@ -21,10 +21,7 @@ class ChatActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        if (savedInstanceState == null) {
-            addFragment(ChatFragment.newInstance())
-        }
+        savedInstanceState ?: addFragment(ChatFragment.newInstance())
     }
 
     override fun finish() {

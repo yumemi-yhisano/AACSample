@@ -22,10 +22,7 @@ class DetailActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        if (savedInstanceState == null) {
-            addFragment(DetailFragment.newInstance(intent.getBundleExtra(MODAL_BUNDLE)))
-        }
+        savedInstanceState ?: addFragment(DetailFragment.newInstance(intent.getBundleExtra(MODAL_BUNDLE)))
     }
 
     override fun finish() {

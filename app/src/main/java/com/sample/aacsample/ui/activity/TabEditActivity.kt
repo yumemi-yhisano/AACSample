@@ -17,10 +17,7 @@ class TabEditActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        if (savedInstanceState == null) {
-            addFragment(TabEditFragment())
-        }
+        savedInstanceState ?: addFragment(TabEditFragment())
     }
 
     override fun onBackPressed() {
