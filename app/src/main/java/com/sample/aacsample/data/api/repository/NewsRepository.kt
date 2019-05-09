@@ -18,14 +18,14 @@ class NewsRepository(val service: NewsService) {
             Category.values().map { it to MutableLiveData<List<Article>>() }.toMap()
 
     fun requestHeadline(country: Country, category: Category): LiveData<List<Article>> {
-        val data = articleData[category]!!
+        val data = articleData.getOrElse(category) { MutableLiveData() }
         service.headline(apiKey, country.name, category.name).enqueue(object : Callback<Headlines> {
-            override fun onFailure(call: Call<Headlines>?, t: Throwable?) {
+            override fun onFailure(call: Call<Headlines>, t: Throwable) {
                 data.postValue(null)
             }
 
-            override fun onResponse(call: Call<Headlines>?, response: Response<Headlines>?) {
-                data.postValue(response?.body()?.articles)
+            override fun onResponse(call: Call<Headlines>, response: Response<Headlines>) {
+                data.postValue(response.body()?.articles)
             }
         })
         return data
