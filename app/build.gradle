@@ -40,7 +40,7 @@ dependencies {
     implementation Libs.support_recyclerview_v7
     implementation Libs.support_design
     implementation Libs.support_constraint_layout
-    kapt Libs.databinding
+    annotationProcessor Libs.databinding
 
     implementation Libs.lifecycle_extensions
     implementation Libs.lifecycle_runtime
