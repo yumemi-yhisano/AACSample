@@ -1,5 +1,6 @@
 package com.sample.aacsample.data.api.repository
 
+import com.sample.aacsample.BuildConfig
 import com.sample.aacsample.data.api.ApiResult
 import com.sample.aacsample.data.api.service.ChatService
 import com.sample.aacsample.data.entity.ChatItem
@@ -12,12 +13,10 @@ import okhttp3.RequestBody
  * Created by y_hisano on 2018/07/27.
  */
 class ChatRepository(val service: ChatService) {
-    private val apiKey = "DZZ3rymvH7MTHx3Pn7u9LwgDVnvC8J4X"
-
     suspend fun requestSmalltalk(query: String): ApiResult<ChatItem> = withContext(Dispatchers.Default) {
         try {
             val result = service.smalltalk(
-                RequestBody.create(MediaType.parse("text/plain"), apiKey),
+                RequestBody.create(MediaType.parse("text/plain"), BuildConfig.A3RT_API_KEY),
                 RequestBody.create(MediaType.parse("text/plain"), query)
             ).execute()
             if (! result.isSuccessful) {
